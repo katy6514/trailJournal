@@ -1,11 +1,13 @@
 console.log("testoooo");
 
-const width = 1100;
+const width = 800;
 const height = 700;
 
 const svg = d3.select('body').append('svg')  
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("stroke", "rgb(127, 127, 127)")
+    .attr("stroke-width", "1px");
 
 
 const projection = d3.geoAlbersUsa()
@@ -66,3 +68,19 @@ svg.on("click", (event) => {
             .call(zoom.transform, d3.zoomIdentity);  // Reset zoom to initial state
     }
 });
+
+
+d3.json('filteredGarminData.geojson').then(data => {
+    svg.selectAll('.gpx')
+        .data(data.features)
+        .enter()
+        .append('path')
+        .attr('class', 'gpx')
+        .attr("fill", "rgba(255, 255, 255, 0)")
+        .attr("stroke", "red")
+        .attr("stroke-width", "2px")
+        .attr('d', path);
+});  
+
+
+
