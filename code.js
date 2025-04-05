@@ -16,7 +16,52 @@ const projection = d3.geoAlbersUsa()
 
 const path = d3.geoPath().projection(projection);
 
-// geojson data from: https://github.com/johan/world.geo.json/tree/master
+
+
+d3.json("cdtInreachData.geojson").then(data => {
+    const points = data.features.filter(d =>
+      d.geometry?.type === "Point" &&
+      Array.isArray(d.geometry.coordinates) &&
+      d.geometry.coordinates.length === 2
+    );
+    const validPoints = points.filter(d => {
+        const projected = projection(d.geometry.coordinates);
+        return projected != null;
+      });
+  
+    // Plot the points
+    svg.selectAll("#points")
+      .data(validPoints)
+      .enter()
+      .append("circle")
+      .attr('class', 'points')
+      .attr("cx", d => projection(d.geometry.coordinates)[0])
+      .attr("cy", d => projection(d.geometry.coordinates)[1])
+      .attr("r", 2)
+      .attr('d', path)
+      .attr("fill", "steelblue")
+      .attr("stroke", "white")
+      .attr("stroke-width", 1);
+
+  });
+
+
+//   d3.json('cdtInreachData.geojson').then(data => {
+//     svg.selectAll('.gpx')
+//         .data(data.features)
+//         .enter()
+//         .append('path')
+//         .attr('class', 'gpx')
+//         .attr("fill", "rgba(255, 255, 255, 0)")
+//         .attr("stroke", "red")
+//         .attr("stroke-width", "2px")
+//         .attr('d', path);
+
+
+// });  
+
+
+  // geojson data from: https://github.com/johan/world.geo.json/tree/master
 d3.json('CDTstates.json').then(data => {
     svg.selectAll('.state')
         .data(data.features)
@@ -54,6 +99,7 @@ function clicked(event, d) {
 const zoom = d3.zoom()
     .scaleExtent([1, 8])  // Limits of the zoom scale
     .on("zoom", (event) => {
+        svg.selectAll("circle").attr("transform", event.transform);  // Apply transform on zoom
         svg.selectAll("path").attr("transform", event.transform);  // Apply transform on zoom
     });
 
@@ -70,17 +116,9 @@ svg.on("click", (event) => {
 });
 
 
-d3.json('filteredGarminData.geojson').then(data => {
-    svg.selectAll('.gpx')
-        .data(data.features)
-        .enter()
-        .append('path')
-        .attr('class', 'gpx')
-        .attr("fill", "rgba(255, 255, 255, 0)")
-        .attr("stroke", "red")
-        .attr("stroke-width", "2px")
-        .attr('d', path);
-});  
 
 
 
+
+
+    

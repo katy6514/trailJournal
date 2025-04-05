@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>US Map with D3</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
 
 </head>
 <body>
     <script src="dataCleaning.js"></script>
     <script src="code.js"></script>
+
+    <svg width="960" height="600">
+        <g id="map">
+          <g id="states"></g>
+          <g id="points"></g>
+        </g>
+      </svg>
 </body>
 </html>
 
