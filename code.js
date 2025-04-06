@@ -37,28 +37,29 @@ d3.json("cdtInreachData.geojson").then(data => {
       .attr('class', 'points')
       .attr("cx", d => projection(d.geometry.coordinates)[0])
       .attr("cy", d => projection(d.geometry.coordinates)[1])
-      .attr("r", 2)
+      .attr("r", 1.5)
       .attr('d', path)
-      .attr("fill", "steelblue")
-      .attr("stroke", "white")
+      .attr("fill", "red")
+      .attr("stroke", d => checkForCampsite(d))
       .attr("stroke-width", 1);
 
   });
 
 
-//   d3.json('cdtInreachData.geojson').then(data => {
-//     svg.selectAll('.gpx')
-//         .data(data.features)
-//         .enter()
-//         .append('path')
-//         .attr('class', 'gpx')
-//         .attr("fill", "rgba(255, 255, 255, 0)")
-//         .attr("stroke", "red")
-//         .attr("stroke-width", "2px")
-//         .attr('d', path);
 
+  function checkForCampsite(data) {
+    // Function to check if the data contains a campsite
+    if (!data || !data.properties) {
+        return false; // Invalid data
+    }
 
-// });  
+    if (data.properties.MessageText.toLowerCase().includes("camped")){
+        return "blue"
+    }
+    return "none"; // No campsite found
+   
+  }
+
 
 
   // geojson data from: https://github.com/johan/world.geo.json/tree/master
@@ -117,6 +118,10 @@ svg.on("click", (event) => {
 
 
 
+svg.append("circle").attr("cx",100).attr("cy",430).attr("r", 6).style("fill", "red")
+svg.append("circle").attr("cx",100).attr("cy",460).attr("r", 6).style("fill", "blue")
+svg.append("text").attr("x", 120).attr("y", 430).text("Garmin Message Sent").style("font-size", "15px").attr("alignment-baseline","middle").style("font-family", "Open Sans")
+svg.append("text").attr("x", 120).attr("y", 460).text("Campsite Location").style("font-size", "15px").attr("alignment-baseline","middle").style("font-family", "Open Sans")
 
 
 
