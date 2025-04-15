@@ -16,7 +16,11 @@ const projection = d3.geoAlbersUsa()
 
 const path = d3.geoPath().projection(projection);
 
-
+/* -----------------------------------------------------
+ *  
+ *  Plotting Garmin Data
+ * 
+ ----------------------------------------------------- */
 
 d3.json("cdtInreachData.geojson").then(data => {
     const points = data.features.filter(d =>
@@ -30,7 +34,7 @@ d3.json("cdtInreachData.geojson").then(data => {
       });
   
     // Plot the points
-    svg.selectAll("#points")
+    svg.selectAll(".points")
       .data(validPoints)
       .enter()
       .append("circle")
@@ -60,7 +64,11 @@ d3.json("cdtInreachData.geojson").then(data => {
    
   }
 
-
+/* -----------------------------------------------------
+ *  
+ *  State outline mapping functionality
+ * 
+ ----------------------------------------------------- */
 
   // geojson data from: https://github.com/johan/world.geo.json/tree/master
 d3.json('CDTstates.json').then(data => {
@@ -75,6 +83,58 @@ d3.json('CDTstates.json').then(data => {
         .attr('d', path)
         .on("click", clicked);
 });  
+
+
+
+
+
+/* -----------------------------------------------------
+ *  
+ *  Photo upload and display
+ * 
+ ----------------------------------------------------- */
+
+document.getElementById('photoInput').addEventListener('change', async (event) => {
+    const files = Array.from(event.target.files);
+    const geoPhotos = [];
+  
+    for (const file of files) {
+      const data = await exifr.gps(file); // This extracts GPS-related data
+  
+      if (data && data.latitude && data.longitude) {
+        geoPhotos.push({
+          file,
+          latitude: data.latitude,
+          longitude: data.longitude
+        });
+      }
+    }
+  
+    console.log('Photos with GPS:', geoPhotos);
+    plotPoints(geoPhotos); // Your custom function to plot them
+  });
+
+
+
+  function plotPoints(photoData) {
+
+    d3.select("svg").selectAll("image")
+      .data(photoData)
+      .enter()
+      .append("image")
+      .attr("xlink:href", d => URL.createObjectURL(d.file))
+      .attr("x", d => projection([d.longitude, d.latitude])[0] - 10)
+      .attr("y", d => projection([d.longitude, d.latitude])[1] - 10)
+      .attr("width", 20)
+      .attr("height", 20)
+      .attr("class", "photo-point");
+  }
+
+/* -----------------------------------------------------
+ *  
+ *  Zoom and Pan functionality
+ * 
+ ----------------------------------------------------- */
 
 // Define the zoom behavior
 function clicked(event, d) {
@@ -103,6 +163,7 @@ const zoom = d3.zoom()
         svg.selectAll("circle").attr("transform", event.transform);  // Apply transform on zoom
         svg.selectAll("path").attr("transform", event.transform);  // Apply transform on zoom
         svg.selectAll("text").attr("transform", event.transform);  // Apply transform on zoom
+        svg.selectAll("image").attr("transform", event.transform);  // Apply transform on zoom
     });
 
 svg.call(zoom);

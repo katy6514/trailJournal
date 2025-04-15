@@ -13,15 +13,30 @@
 
 </head>
 <body>
+  <input type="file" id="photoInput" multiple accept="image/*">
+
     <script src="dataCleaning.js"></script>
     <script src="code.js"></script>
+    <!-- <svg id="svgElement" ></svg> -->
 
-    <svg width="960" height="600">
+    <!-- <svg id="svgElement"  width="960" height="600">
         <g id="map">
           <g id="states"></g>
           <g id="points"></g>
         </g>
-      </svg>
+      </svg> -->
+
+      <div id="tooltip" style="
+          position: absolute;
+          pointer-events: none;
+          background: white;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          padding: 4px;
+          display: none;
+          box-shadow: 0 0 5px rgba(0,0,0,0.3);
+          z-index: 10;
+        "></div>
 </body>
 </html>
 
