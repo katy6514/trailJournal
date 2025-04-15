@@ -102,6 +102,7 @@ const zoom = d3.zoom()
     .on("zoom", (event) => {
         svg.selectAll("circle").attr("transform", event.transform);  // Apply transform on zoom
         svg.selectAll("path").attr("transform", event.transform);  // Apply transform on zoom
+        svg.selectAll("text").attr("transform", event.transform);  // Apply transform on zoom
     });
 
 svg.call(zoom);
