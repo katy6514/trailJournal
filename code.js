@@ -1,14 +1,17 @@
-console.log("Hello, world! If you're reading this, I'm looking for a job! \n\nCheck out my github (github.com/katy6514) and shoot me an email if you'd like to work together :)");
+console.log(
+  "Hello, world! If you're reading this, I'm looking for a job! \n\nCheck out my github (github.com/katy6514) and shoot me an email if you'd like to work together :)"
+);
 
 /* -----------------------------------------------------
  *  Initial SVG setup
  ----------------------------------------------------- */
-const width = 800;
+const width = 1000;
 const height = 700;
 
 const svg = d3
   .select("body")
   .append("svg")
+  .attr("id", "CDTmap")
   .attr("width", width)
   .attr("height", height)
   .attr("stroke", "rgb(127, 127, 127)")
@@ -45,11 +48,9 @@ d3.json("cdtInreachData.geojson").then((data) => {
     .attr("class", "points")
     .attr("cx", (d) => projection(d.geometry.coordinates)[0])
     .attr("cy", (d) => projection(d.geometry.coordinates)[1])
-    .attr("r", 1.5)
-    .attr("d", path)
-    .attr("fill", "red")
-    .attr("stroke", (d) => checkForCampsite(d))
-    .attr("stroke-width", 1);
+    .attr("r", 4)
+    .attr("fill", (d) => checkForCampsite(d))
+    .attr("stroke", "none");
 });
 
 function checkForCampsite(data) {
@@ -61,7 +62,7 @@ function checkForCampsite(data) {
   if (data.properties.MessageText.toLowerCase().includes("camped")) {
     return "blue";
   }
-  return "none"; // No campsite found
+  return "red"; // No campsite found
 }
 
 /* -----------------------------------------------------
@@ -82,8 +83,6 @@ d3.json("CDTstates.json").then((data) => {
     .on("click", clicked);
 });
 
-
-
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
  ----------------------------------------------------- */
@@ -102,6 +101,7 @@ d3.json("photoData.json").then((photoData) => {
     .attr("cy", (d) => projection([d.longitude, d.latitude])[1])
     .attr("r", 4)
     .attr("fill", "green")
+    .attr("stroke", "none")
     .on("mouseover", handleMouseOver)
     .on("mousemove", handleMouseMove)
     .on("mouseout", handleMouseOut);
@@ -111,7 +111,7 @@ function handleMouseOver(event, d) {
   const tooltip = document.getElementById("tooltip");
 
   tooltip.innerHTML = `
-      <img src="${d.path}" width="350">
+      <img src="${d.path}" width="550">
     `;
   tooltip.style.display = "block";
 }
@@ -155,12 +155,15 @@ function clicked(event, d) {
 // Set up the zoom behavior
 const zoom = d3
   .zoom()
-  .scaleExtent([1, 8]) // Limits of the zoom scale
+  .scaleExtent([1, 500]) // Limits of the zoom scale
   .on("zoom", (event) => {
+    // d3.select("#CDTmap").attr("transform", event.transform);
     svg.selectAll("circle").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("path").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("text").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("image").attr("transform", event.transform); // Apply transform on zoom
+    // Adjust point sizes inversely to zoom
+    d3.selectAll("circle").attr("r", 4 / event.transform.k);
   });
 
 svg.call(zoom);
@@ -173,7 +176,6 @@ svg.on("click", (event) => {
   }
 });
 
-
 /* -----------------------------------------------------
  *  Legend
  ----------------------------------------------------- */
@@ -182,13 +184,22 @@ svg
   .attr("cx", 100)
   .attr("cy", 430)
   .attr("r", 6)
-  .style("fill", "red");
+  .style("fill", "red")
+  .style("stroke", "none");
 svg
   .append("circle")
   .attr("cx", 100)
   .attr("cy", 460)
   .attr("r", 6)
-  .style("fill", "blue");
+  .style("fill", "blue")
+  .style("stroke", "none");
+svg
+  .append("circle")
+  .attr("cx", 100)
+  .attr("cy", 490)
+  .attr("r", 6)
+  .style("fill", "green")
+  .style("stroke", "none");
 svg
   .append("text")
   .attr("x", 120)
@@ -202,6 +213,14 @@ svg
   .attr("x", 120)
   .attr("y", 460)
   .text("Campsite Location")
+  .style("font-size", "15px")
+  .attr("alignment-baseline", "middle")
+  .style("font-family", "Open Sans");
+svg
+  .append("text")
+  .attr("x", 120)
+  .attr("y", 490)
+  .text("Photo Location")
   .style("font-size", "15px")
   .attr("alignment-baseline", "middle")
   .style("font-family", "Open Sans");
