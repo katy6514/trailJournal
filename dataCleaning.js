@@ -1,10 +1,6 @@
 /**
- * This script reads a CSV file, converts it to GeoJSON,
- * filters the data based on certain criteria,
- * and saves the cleaned data to a new GeoJSON file.
+ * Reads a CSV file, converts it to GeoJSON
  */
-
-const csvFilePath = "message-history.csv";
 
 function csvToGeoJSON(data) {
   return {
@@ -20,13 +16,23 @@ function csvToGeoJSON(data) {
   };
 }
 
-d3.csv(csvFilePath).then((data) => {
+/**
+ * Load CSV data from my garmin device and convert it to 
+ * GeoJSON using the csvToGeoJSON helper function
+ * 
+ * It also filters the data based on a time threshold 
+ * corresponding to the beginning of my hike
+ */
+
+d3.csv("message-history.csv").then((data) => {
   const geojson = csvToGeoJSON(data);
 
   const cleanedGeojson = {
     ...geojson,
     features: geojson.features.filter((f) => {
       const coords = f.geometry?.coordinates;
+      // check if coords is an array and has at least 2 elements
+      // check if coords[0] and coords[1] are numbers
       return (
         Array.isArray(coords) &&
         coords.length >= 2 &&
@@ -47,23 +53,19 @@ d3.csv(csvFilePath).then((data) => {
 
       const timestamp = new Date(gpsTime);
 
-      // console.log({gpsTime})
       if (timestamp >= timeThreshold) {
         return true; // Keep this feature if it meets the time threshold
       }
     }),
   };
 
-  // console.log(cleanedGeojson);
-  // console.log(timeFilteredGeojson);
-  // console.log(JSON.stringify(timeFilteredGeojson, null, 2));
-  // saveToFile(timeFilteredGeojson, 'cdtInreachData.geojson'); // Save the filtered GeoJSON to a file
+
+  // Save the filtered GeoJSON to a file
+  // saveToFile(timeFilteredGeojson, 'cdtInreachData.geojson');
 });
 
 /**
  * Save to file
- * @param {*} data
- * @param {*} filename
  */
 
 function saveToFile(data, filename) {
