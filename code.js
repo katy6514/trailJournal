@@ -1,3 +1,5 @@
+console.log("Hello, world! If you're reading this, I'm looking for a job! \n\nCheck out my github (github.com/katy6514) and shoot me an email if you'd like to work together :)");
+
 /* -----------------------------------------------------
  *  Initial SVG setup
  ----------------------------------------------------- */
