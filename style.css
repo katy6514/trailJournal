@@ -6,7 +6,11 @@ body {
 
 h1 , p{
     color: #333;
-    text-align: center;
+}
+
+section {
+    width: 80%;
+    margin: auto;
 }
 
 #CDTmap {
