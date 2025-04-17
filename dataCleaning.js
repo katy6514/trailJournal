@@ -905,12 +905,16 @@ async function loadPhotoMetadata(paths) {
       const tags = ExifReader.load(arrayBuffer);
       const lat = tags.GPSLatitude?.description;
       const lon = -tags.GPSLongitude?.description;
+      const dateTime = tags.DateTimeOriginal?.description;
+      const offsetTime = tags.OffsetTimeOriginal?.description;
 
       if (lat && lon) {
         geoPhotos.push({
           path,
           latitude: lat,
           longitude: lon,
+          dateTime,
+          offsetTime,
         });
       } else {
         console.warn(`No GPS data found in ${path}`);
@@ -924,9 +928,11 @@ async function loadPhotoMetadata(paths) {
     path: photo.path, // e.g. "CDTvisPhotos/IMG_1234.jpg"
     latitude: photo.latitude,
     longitude: photo.longitude,
+    dateTime: photo.dateTime,
+    offsetTime: photo.offsetTime,
   }));
 
-  downloadGeoJSON(exportableGeoPhotos);
+  // downloadGeoJSON(exportableGeoPhotos);
 }
 
 /**
