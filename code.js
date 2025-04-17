@@ -50,8 +50,30 @@ d3.json("cdtInreachData.geojson").then((data) => {
     .attr("cy", (d) => projection(d.geometry.coordinates)[1])
     .attr("r", 4)
     .attr("fill", (d) => checkForCampsite(d))
-    .attr("stroke", "none");
+    .attr("stroke", "none");    
+    // .on("mouseover", inReachMouseOver)
+    // .on("mousemove", inReachMouseMove)
+    // .on("mouseout", inReachMouseOut);
 });
+
+// function inReachMouseOver(event, d) {
+//   const tooltip = document.getElementById("tooltip");
+
+//   tooltip.innerHTML = `
+//       <img src="${d.path}" width="550">
+//     `;
+//   tooltip.style.display = "block";
+// }
+
+// function inReachMouseMove(event) {
+//   const tooltip = document.getElementById("tooltip");
+//   tooltip.style.left = event.pageX + 15 + "px";
+//   tooltip.style.top = event.pageY - 50 + "px";
+// }
+
+// function inReachMouseOut() {
+//   document.getElementById("tooltip").style.display = "none";
+// }
 
 function checkForCampsite(data) {
   // Function to check if the data contains a campsite
@@ -102,12 +124,12 @@ d3.json("photoData.json").then((photoData) => {
     .attr("r", 4)
     .attr("fill", "green")
     .attr("stroke", "none")
-    .on("mouseover", handleMouseOver)
-    .on("mousemove", handleMouseMove)
-    .on("mouseout", handleMouseOut);
+    .on("mouseover", photoMouseOver)
+    .on("mousemove", photoMouseMove)
+    .on("mouseout", photoMouseOut);
 });
 
-function handleMouseOver(event, d) {
+function photoMouseOver(event, d) {
   const tooltip = document.getElementById("tooltip");
 
   tooltip.innerHTML = `
@@ -116,13 +138,13 @@ function handleMouseOver(event, d) {
   tooltip.style.display = "block";
 }
 
-function handleMouseMove(event) {
+function photoMouseMove(event) {
   const tooltip = document.getElementById("tooltip");
   tooltip.style.left = event.pageX + 15 + "px";
   tooltip.style.top = event.pageY - 50 + "px";
 }
 
-function handleMouseOut() {
+function photoMouseOut() {
   document.getElementById("tooltip").style.display = "none";
 }
 
