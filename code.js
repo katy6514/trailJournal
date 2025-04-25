@@ -50,10 +50,10 @@ d3.json("cdtInreachData.geojson").then((data) => {
     .attr("cy", (d) => projection(d.geometry.coordinates)[1])
     .attr("r", 4)
     .attr("fill", (d) => checkForCampsite(d))
-    .attr("stroke", "none");    
-    // .on("mouseover", inReachMouseOver)
-    // .on("mousemove", inReachMouseMove)
-    // .on("mouseout", inReachMouseOut);
+    .attr("stroke", "none");
+  // .on("mouseover", inReachMouseOver)
+  // .on("mousemove", inReachMouseMove)
+  // .on("mouseout", inReachMouseOut);
 });
 
 // function inReachMouseOver(event, d) {
@@ -106,6 +106,84 @@ d3.json("CDTstates.json").then((data) => {
 });
 
 /* -----------------------------------------------------
+ *  City mapping functionality
+ ----------------------------------------------------- */
+const cities = [
+  { name: "CDT Northern Terminus", lat: 48.99, lon: -113.6, xOffset: 15, yOffset: -15 },
+  { name: "Kalispell", lat: 48.192, lon: -114.316109, xOffset: -45, yOffset: -25 },
+  { name: "Many Glacier", lat: 48.7967, lon: -113.6578, xOffset: 15, yOffset: -5 },
+  { name: "Two Medicine", lat: 48.4915, lon: -113.3646, xOffset: 15, yOffset: -5 },
+  { name: "East Glacier", lat: 48.4415, lon: -113.2184, xOffset: 15, yOffset: 5 },
+  { name: "Augusta", lat: 47.4927, lon: -112.3922, xOffset: 5, yOffset: -5 },
+  { name: "Lincoln", lat: 46.9549, lon: -112.6817, xOffset: -45, yOffset: -5 },
+  { name: "Helena", lat: 46.5891, lon: -112.0391, xOffset: 5, yOffset: 5 },
+  { name: "Anaconda", lat: 46.1263, lon: -112.9478, xOffset: -75, yOffset: -15 },
+  { name: "Camp Sula", lat: 45.8363, lon: -113.9821, xOffset: -55, yOffset: -5 },
+  { name: "Lima", lat: 44.6369, lon: -112.592, xOffset: 5, yOffset: -5 },
+  { name: "West Yellowstone", lat: 44.6621, lon: -111.1041, xOffset: 5, yOffset: -15 },
+  { name: "Old Faithful Village", lat: 44.4605, lon: -110.8281, xOffset: 5, yOffset: -10 },
+  { name: "Grant Village", lat: 44.3896, lon: -110.5554, xOffset: 5, yOffset: 0 },
+  { name: "Dubois", lat: 43.5336, lon: -109.6304, xOffset: 5, yOffset: -5 },
+  { name: "Pinedale", lat: 42.8679, lon: -109.8634, xOffset: -55, yOffset: -5 },
+  { name: "Atlantic City", lat: 42.4966, lon: -108.7307, xOffset: 5, yOffset: -5 },
+  { name: "Rawlins", lat: 41.7911, lon: -107.2387, xOffset: 5, yOffset: -5 },
+  { name: "Encampment", lat: 41.2061, lon: -106.8001, xOffset: 5, yOffset: -5 },
+  { name: "Steamboat Springs", lat: 40.4850, lon: -106.8317, xOffset: -115, yOffset: -5 },
+  { name: "Grand Lake", lat: 40.2522, lon: -105.8231, xOffset: -85, yOffset: 5 },
+  { name: "Breckenridge", lat: 39.4817, lon: -106.0384, xOffset: 5, yOffset: 5 },
+  { name: "Twin Lakes", lat: 39.0820, lon: - 106.3823, xOffset: 5, yOffset: 5 },
+  { name: "Salida", lat: 38.5347, lon: -105.9989, xOffset: 5, yOffset: 5 },
+  { name: "Lake City", lat: 38.0300, lon: -107.3153, xOffset: 5, yOffset: 5 },
+  { name: "Pagosa Springs", lat: 37.2694, lon: -107.0098, xOffset: 5, yOffset: 5 },
+  { name: "Chama", lat: 36.9028, lon: -106.5792, xOffset: 5, yOffset: 5 },
+  { name: "Ghost Ranch", lat: 36.3313, lon: -106.4729, xOffset: 5, yOffset: 5 },
+  { name: "Cuba", lat: 36.0222, lon: -106.9584, xOffset: 5, yOffset: 5 },
+  { name: "Grants", lat: 35.1473, lon: -107.8514, xOffset: 5, yOffset: 5 },
+  { name: "Pie Town", lat: 34.2984, lon: -108.1348, xOffset: 5, yOffset: 5 },
+  { name: "Doc Campbell's", lat: 33.1987, lon: -108.2081, xOffset: 5, yOffset: 5 },
+  { name: "Silver City", lat: 32.7701, lon: -108.2803, xOffset: 5, yOffset: 5 },
+  { name: "Lordsburg", lat: 32.3504, lon: -108.7087, xOffset: 5, yOffset: 5 },
+  { name: "CDT Southern Terminus", lat: 31.8611, lon: -108.2511, xOffset: 5, yOffset: 5 },
+];
+
+const cityGroup = svg.append("g").attr("class", "cities");
+
+cityGroup.selectAll("circle")
+  .data(cities)
+  .enter()
+  .append("circle")
+  .attr("r", 4)
+  .attr("fill", "black")
+  .attr("stroke", "none")
+  .attr("cx", d => projection([d.lon, d.lat])[0])
+  .attr("cy", d => projection([d.lon, d.lat])[1]);
+
+  cityGroup.selectAll("line")
+  .data(cities)
+  .enter()
+  .append("line")
+  .attr("x1", d => projection([d.lon, d.lat])[0])
+  .attr("y1", d => projection([d.lon, d.lat])[1])
+  .attr("x2", d => projection([d.lon, d.lat])[0] + d.xOffset -1)
+  .attr("y2", d => projection([d.lon, d.lat])[1] + d.yOffset -1)
+  .attr("stroke", "black")
+  .attr("stroke-width", 1);
+
+  cityGroup.selectAll("text")
+  .data(cities)
+  .enter()
+  .append("text")
+  .attr("class", "city_labels")
+  .attr("x", d => projection([d.lon, d.lat])[0] + d.xOffset)
+  .attr("y", d => projection([d.lon, d.lat])[1] + d.yOffset)
+  .text(d => d.name)
+  .attr("font-size", 12)
+  .attr("fill", "black")
+  .attr("stroke", "none");
+
+
+
+/* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
  ----------------------------------------------------- */
 d3.json("photoData.json").then((photoData) => {
@@ -152,6 +230,7 @@ function photoMouseOut() {
  *  Zoom and Pan functionality
  ----------------------------------------------------- */
 // Define the zoom behavior
+
 function clicked(event, d) {
   // Check if we’re already zoomed in on this state
   const [[x0, y0], [x1, y1]] = path.bounds(d); // Get bounding box of the selected state
@@ -178,15 +257,32 @@ function clicked(event, d) {
 const zoom = d3
   .zoom()
   .scaleExtent([1, 500]) // Limits of the zoom scale
+  // .on("zoom", handleZoom);
   .on("zoom", (event) => {
     // d3.select("#CDTmap").attr("transform", event.transform);
     svg.selectAll("circle").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("path").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("text").attr("transform", event.transform); // Apply transform on zoom
+    // svg.selectAll("#city_labels").attr("transform", event.transform); // Apply transform on zoom
     svg.selectAll("image").attr("transform", event.transform); // Apply transform on zoom
+    svg.selectAll("line").attr("transform", event.transform); // Apply transform on zoom
     // Adjust point sizes inversely to zoom
     d3.selectAll("circle").attr("r", 4 / event.transform.k);
+    d3.selectAll("text").attr("font-size", 12 / event.transform.k);
+    d3.selectAll("line").attr("stroke-width", 1 / event.transform.k);
   });
+
+
+// function handleZoom(event) {
+//   const t = event.transform;
+
+//   d3.select("#CDTmap").attr("transform", t);
+
+//   // Inverse-scale points
+//   d3.selectAll("circle").attr("r", 4 / t.k);
+
+//   // You don’t need to set transform on every element if they’re grouped under one <g>
+// }
 
 svg.call(zoom);
 
