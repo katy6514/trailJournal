@@ -242,7 +242,7 @@ cityGroup
   .attr("cx", (d) => projection([d.lon, d.lat])[0])
   .attr("cy", (d) => projection([d.lon, d.lat])[1]);
 
-  const lines = cityGroup
+const lines = cityGroup
   .selectAll("line")
   .data(cities)
   .enter()
@@ -254,7 +254,7 @@ cityGroup
   .attr("stroke", "black")
   .attr("stroke-width", 1);
 
-  const labels = cityGroup
+const labels = cityGroup
   .selectAll("text")
   .data(cities)
   .enter()
@@ -267,7 +267,6 @@ cityGroup
   .attr("text-anchor", (d) => (d.dx <= 0 ? "end" : "start"))
   .attr("fill", "black")
   .attr("stroke", "none");
-
 
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
@@ -362,14 +361,7 @@ const zoom = d3
     d3.selectAll("circle").attr("r", 4 / event.transform.k);
     labels.attr("font-size", 12 / event.transform.k);
     d3.selectAll("line").attr("stroke-width", 1 / event.transform.k);
-
-
-
-
-
   });
-
-
 
 svg.call(zoom);
 
