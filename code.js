@@ -242,30 +242,48 @@ cityGroup
   .attr("cx", (d) => projection([d.lon, d.lat])[0])
   .attr("cy", (d) => projection([d.lon, d.lat])[1]);
 
-cityGroup
+  const lines = cityGroup
   .selectAll("line")
   .data(cities)
   .enter()
   .append("line")
   .attr("x1", (d) => projection([d.lon, d.lat])[0])
   .attr("y1", (d) => projection([d.lon, d.lat])[1])
-  .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.xOffset - 1)
-  .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.yOffset - 1)
+  // .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.dx - 1)
+  // .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.dy - 1)
   .attr("stroke", "black")
   .attr("stroke-width", 1);
 
-cityGroup
+  const labels = cityGroup
   .selectAll("text")
   .data(cities)
   .enter()
   .append("text")
   .attr("class", "city_labels")
-  .attr("x", (d) => projection([d.lon, d.lat])[0] + d.xOffset)
-  .attr("y", (d) => projection([d.lon, d.lat])[1] + d.yOffset)
+  .attr("x", (d) => projection([d.lon, d.lat])[0] + d.dx)
+  .attr("y", (d) => projection([d.lon, d.lat])[1] + d.dy)
   .text((d) => d.name)
   .attr("font-size", 12)
   .attr("fill", "black")
   .attr("stroke", "none");
+
+  labels.each(function(d, i) {
+    const label = d3.select(this);
+    const bbox = this.getBBox(); // get width, height
+  
+    const x0 = projection([d.lon, d.lat])[0];
+    const y0 = projection([d.lon, d.lat])[1];
+  
+    const xLabel = x0 + d.dx;
+    const yLabel = y0 + d.dy;
+  
+    const xEnd = d.dx <= 0 ? xLabel + bbox.width : xLabel;
+    const yEnd = yLabel;
+  
+    d3.select(lines.nodes()[i])
+      .attr("x2", xEnd)
+      .attr("y2", yEnd);
+  });
 
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
