@@ -94,138 +94,138 @@ const cities = [
     name: "CDT Northern Terminus",
     lat: 48.99,
     lon: -113.6,
-    xOffset: 15,
-    yOffset: -15,
+    dx: -155,
+    dy: -15,
   },
   {
     name: "Kalispell",
     lat: 48.192,
     lon: -114.316109,
-    xOffset: -45,
-    yOffset: -25,
+    dx: -65,
+    dy: -10,
   },
   {
     name: "Many Glacier",
     lat: 48.7967,
     lon: -113.6578,
-    xOffset: 15,
-    yOffset: -5,
+    dx: 15,
+    dy: -15,
   },
   {
     name: "Two Medicine",
     lat: 48.4915,
     lon: -113.3646,
-    xOffset: 15,
-    yOffset: -5,
+    dx: 15,
+    dy: -10,
   },
   {
     name: "East Glacier",
     lat: 48.4415,
     lon: -113.2184,
-    xOffset: 15,
-    yOffset: 5,
+    dx: 15,
+    dy: 5,
   },
-  { name: "Augusta", lat: 47.4927, lon: -112.3922, xOffset: 5, yOffset: -5 },
-  { name: "Lincoln", lat: 46.9549, lon: -112.6817, xOffset: -45, yOffset: -5 },
-  { name: "Helena", lat: 46.5891, lon: -112.0391, xOffset: 5, yOffset: 5 },
+  { name: "Augusta", lat: 47.4927, lon: -112.3922, dx: 5, dy: -5 },
+  { name: "Lincoln", lat: 46.9549, lon: -112.6817, dx: -45, dy: -5 },
+  { name: "Helena", lat: 46.5891, lon: -112.0391, dx: 5, dy: 5 },
   {
     name: "Anaconda",
     lat: 46.1263,
     lon: -112.9478,
-    xOffset: -75,
-    yOffset: -15,
+    dx: -75,
+    dy: -15,
   },
   {
     name: "Camp Sula",
     lat: 45.8363,
     lon: -113.9821,
-    xOffset: -55,
-    yOffset: -5,
+    dx: -55,
+    dy: -5,
   },
-  { name: "Lima", lat: 44.6369, lon: -112.592, xOffset: 5, yOffset: -5 },
+  { name: "Lima", lat: 44.6369, lon: -112.592, dx: 5, dy: -5 },
   {
     name: "West Yellowstone",
     lat: 44.6621,
     lon: -111.1041,
-    xOffset: 5,
-    yOffset: -15,
+    dx: 5,
+    dy: -15,
   },
   {
     name: "Old Faithful Village",
     lat: 44.4605,
     lon: -110.8281,
-    xOffset: 5,
-    yOffset: -10,
+    dx: 5,
+    dy: -10,
   },
   {
     name: "Grant Village",
     lat: 44.3896,
     lon: -110.5554,
-    xOffset: 5,
-    yOffset: 0,
+    dx: 5,
+    dy: 0,
   },
-  { name: "Dubois", lat: 43.5336, lon: -109.6304, xOffset: 5, yOffset: -5 },
-  { name: "Pinedale", lat: 42.8679, lon: -109.8634, xOffset: -55, yOffset: -5 },
+  { name: "Dubois", lat: 43.5336, lon: -109.6304, dx: 5, dy: -5 },
+  { name: "Pinedale", lat: 42.8679, lon: -109.8634, dx: -55, dy: -5 },
   {
     name: "Atlantic City",
     lat: 42.4966,
     lon: -108.7307,
-    xOffset: 5,
-    yOffset: -5,
+    dx: 5,
+    dy: -5,
   },
-  { name: "Rawlins", lat: 41.7911, lon: -107.2387, xOffset: 5, yOffset: -5 },
-  { name: "Encampment", lat: 41.2061, lon: -106.8001, xOffset: 5, yOffset: -5 },
+  { name: "Rawlins", lat: 41.7911, lon: -107.2387, dx: 5, dy: -5 },
+  { name: "Encampment", lat: 41.2061, lon: -106.8001, dx: 5, dy: -5 },
   {
     name: "Steamboat Springs",
     lat: 40.485,
     lon: -106.8317,
-    xOffset: -115,
-    yOffset: -5,
+    dx: -115,
+    dy: -5,
   },
   {
     name: "Grand Lake",
     lat: 40.2522,
     lon: -105.8231,
-    xOffset: -85,
-    yOffset: 5,
+    dx: -85,
+    dy: 5,
   },
   {
     name: "Breckenridge",
     lat: 39.4817,
     lon: -106.0384,
-    xOffset: 5,
-    yOffset: 5,
+    dx: 5,
+    dy: 5,
   },
-  { name: "Twin Lakes", lat: 39.082, lon: -106.3823, xOffset: 5, yOffset: 5 },
-  { name: "Salida", lat: 38.5347, lon: -105.9989, xOffset: 5, yOffset: 5 },
-  { name: "Lake City", lat: 38.03, lon: -107.3153, xOffset: 5, yOffset: 5 },
+  { name: "Twin Lakes", lat: 39.082, lon: -106.3823, dx: 5, dy: 5 },
+  { name: "Salida", lat: 38.5347, lon: -105.9989, dx: 5, dy: 5 },
+  { name: "Lake City", lat: 38.03, lon: -107.3153, dx: 5, dy: 5 },
   {
     name: "Pagosa Springs",
     lat: 37.2694,
     lon: -107.0098,
-    xOffset: 5,
-    yOffset: 5,
+    dx: 5,
+    dy: 5,
   },
-  { name: "Chama", lat: 36.9028, lon: -106.5792, xOffset: 5, yOffset: 5 },
-  { name: "Ghost Ranch", lat: 36.3313, lon: -106.4729, xOffset: 5, yOffset: 5 },
-  { name: "Cuba", lat: 36.0222, lon: -106.9584, xOffset: 5, yOffset: 5 },
-  { name: "Grants", lat: 35.1473, lon: -107.8514, xOffset: 5, yOffset: 5 },
-  { name: "Pie Town", lat: 34.2984, lon: -108.1348, xOffset: 5, yOffset: 5 },
+  { name: "Chama", lat: 36.9028, lon: -106.5792, dx: 5, dy: 5 },
+  { name: "Ghost Ranch", lat: 36.3313, lon: -106.4729, dx: 5, dy: 5 },
+  { name: "Cuba", lat: 36.0222, lon: -106.9584, dx: 5, dy: 5 },
+  { name: "Grants", lat: 35.1473, lon: -107.8514, dx: 5, dy: 5 },
+  { name: "Pie Town", lat: 34.2984, lon: -108.1348, dx: 5, dy: 5 },
   {
     name: "Doc Campbell's",
     lat: 33.1987,
     lon: -108.2081,
-    xOffset: 5,
-    yOffset: 5,
+    dx: 5,
+    dy: 5,
   },
-  { name: "Silver City", lat: 32.7701, lon: -108.2803, xOffset: 5, yOffset: 5 },
-  { name: "Lordsburg", lat: 32.3504, lon: -108.7087, xOffset: 5, yOffset: 5 },
+  { name: "Silver City", lat: 32.7701, lon: -108.2803, dx: 5, dy: 5 },
+  { name: "Lordsburg", lat: 32.3504, lon: -108.7087, dx: 5, dy: 5 },
   {
     name: "CDT Southern Terminus",
     lat: 31.8611,
     lon: -108.2511,
-    xOffset: 5,
-    yOffset: 5,
+    dx: 5,
+    dy: 5,
   },
 ];
 
@@ -296,9 +296,10 @@ function handleMouseOver(event, d) {
 
   if (d.type === "Feature") {
     // If the data is a GeoJSON Feature, extract properties
+    // display message text but only when logged in
     // console.log(d)
-    tooltip.innerHTML = ` <p>Message: ${d.properties.MessageText}<p>`;
-    tooltip.style.display = "block";
+    // tooltip.innerHTML = ` <p>Message: ${d.properties.MessageText}<p>`;
+    // tooltip.style.display = "block";
   } else {
     tooltip.innerHTML = `<img src="${d.path}" width="550">`;
     tooltip.style.display = "block";
@@ -361,16 +362,7 @@ const zoom = d3
     d3.selectAll("line").attr("stroke-width", 1 / event.transform.k);
   });
 
-// function handleZoom(event) {
-//   const t = event.transform;
 
-//   d3.select("#CDTmap").attr("transform", t);
-
-//   // Inverse-scale points
-//   d3.selectAll("circle").attr("r", 4 / t.k);
-
-//   // You don’t need to set transform on every element if they’re grouped under one <g>
-// }
 
 svg.call(zoom);
 
