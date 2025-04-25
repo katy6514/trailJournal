@@ -249,8 +249,8 @@ const lines = cityGroup
   .append("line")
   .attr("x1", (d) => projection([d.lon, d.lat])[0])
   .attr("y1", (d) => projection([d.lon, d.lat])[1])
-  .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.dx - 1)
-  .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.dy - 1)
+  .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.dx )
+  .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.dy )
   .attr("stroke", "black")
   .attr("stroke-width", 1);
 
