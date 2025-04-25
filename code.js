@@ -249,8 +249,8 @@ const lines = cityGroup
   .append("line")
   .attr("x1", (d) => projection([d.lon, d.lat])[0])
   .attr("y1", (d) => projection([d.lon, d.lat])[1])
-  .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.dx )
-  .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.dy )
+  .attr("x2", (d) => projection([d.lon, d.lat])[0] + d.dx)
+  .attr("y2", (d) => projection([d.lon, d.lat])[1] + d.dy)
   .attr("stroke", "black")
   .attr("stroke-width", 1);
 
@@ -267,6 +267,8 @@ const labels = cityGroup
   .attr("text-anchor", (d) => (d.dx <= 0 ? "end" : "start"))
   .attr("fill", "black")
   .attr("stroke", "none");
+
+
 
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
@@ -350,17 +352,21 @@ const zoom = d3
   .scaleExtent([1, 500]) // Limits of the zoom scale
   // .on("zoom", handleZoom);
   .on("zoom", (event) => {
-    // d3.select("#CDTmap").attr("transform", event.transform);
-    svg.selectAll("circle").attr("transform", event.transform); // Apply transform on zoom
-    svg.selectAll("path").attr("transform", event.transform); // Apply transform on zoom
-    svg.selectAll("text").attr("transform", event.transform); // Apply transform on zoom
-    // svg.selectAll("#city_labels").attr("transform", event.transform); // Apply transform on zoom
-    svg.selectAll("image").attr("transform", event.transform); // Apply transform on zoom
-    svg.selectAll("line").attr("transform", event.transform); // Apply transform on zoom
+    const { transform } = event;
+    const scale = transform.k;
+
+    // d3.select("#CDTmap").attr("transform", transform);
+    svg.selectAll("circle").attr("transform", transform); // Apply transform on zoom
+    svg.selectAll("path").attr("transform", transform); // Apply transform on zoom
+    svg.selectAll("text").attr("transform", transform); // Apply transform on zoom
+    svg.selectAll("image").attr("transform", transform); // Apply transform on zoom
+    svg.selectAll("line").attr("transform", transform); // Apply transform on zoom
+
     // Adjust point sizes inversely to zoom
-    d3.selectAll("circle").attr("r", 4 / event.transform.k);
-    labels.attr("font-size", 12 / event.transform.k);
-    d3.selectAll("line").attr("stroke-width", 1 / event.transform.k);
+    d3.selectAll("circle").attr("r", 4 / scale);
+    labels.attr("font-size", 12 / scale);
+    d3.selectAll("line").attr("stroke-width", 1 / scale);
+    
   });
 
 svg.call(zoom);
@@ -397,7 +403,7 @@ svg
   .attr("r", 6)
   .style("fill", "green")
   .style("stroke", "none");
-  svg
+svg
   .append("circle")
   .attr("cx", 100)
   .attr("cy", 520)
@@ -428,7 +434,7 @@ svg
   .style("font-size", "15px")
   .attr("alignment-baseline", "middle")
   .style("font-family", "Open Sans");
-  svg
+svg
   .append("text")
   .attr("x", 120)
   .attr("y", 520)
