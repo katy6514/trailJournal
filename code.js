@@ -94,138 +94,138 @@ const cities = [
     name: "CDT Northern Terminus",
     lat: 48.99,
     lon: -113.6,
-    dx: -155,
-    dy: -15,
+    dx: -15,
+    dy: -20,
   },
   {
     name: "Kalispell",
     lat: 48.192,
     lon: -114.316109,
-    dx: -65,
+    dx: -25,
     dy: -10,
   },
   {
     name: "Many Glacier",
     lat: 48.7967,
     lon: -113.6578,
-    dx: 15,
+    dx: 25,
     dy: -15,
   },
   {
     name: "Two Medicine",
     lat: 48.4915,
     lon: -113.3646,
-    dx: 15,
+    dx: 25,
     dy: -10,
   },
   {
     name: "East Glacier",
     lat: 48.4415,
     lon: -113.2184,
-    dx: 15,
+    dx: 25,
     dy: 5,
   },
-  { name: "Augusta", lat: 47.4927, lon: -112.3922, dx: 15, dy: -10 },
-  { name: "Lincoln", lat: 46.9549, lon: -112.6817, dx: -65, dy: -15 },
-  { name: "Helena", lat: 46.5891, lon: -112.0391, dx: 5, dy: 5 },
+  { name: "Augusta", lat: 47.4927, lon: -112.3922, dx: 25, dy: -10 },
+  { name: "Lincoln", lat: 46.9549, lon: -112.6817, dx: -25, dy: -5 },
+  { name: "Helena", lat: 46.5891, lon: -112.0391, dx: 25, dy: 5 },
   {
     name: "Anaconda",
     lat: 46.1263,
     lon: -112.9478,
-    dx: -75,
+    dx: -25,
     dy: -15,
   },
   {
     name: "Camp Sula",
     lat: 45.8363,
     lon: -113.9821,
-    dx: -75,
-    dy: -5,
+    dx: -25,
+    dy: 5,
   },
-  { name: "Lima", lat: 44.6369, lon: -112.592, dx: -45, dy: -5 },
+  { name: "Lima", lat: 44.6369, lon: -112.592, dx: -25, dy: -5 },
   {
     name: "West Yellowstone",
     lat: 44.6621,
     lon: -111.1041,
-    dx: 1,
+    dx: 25,
     dy: -20,
   },
   {
     name: "Old Faithful Village",
     lat: 44.4605,
     lon: -110.8281,
-    dx: 5,
+    dx: 25,
     dy: -10,
   },
   {
     name: "Grant Village",
     lat: 44.3896,
     lon: -110.5554,
-    dx: 15,
-    dy: 0,
+    dx: 25,
+    dy: 5,
   },
-  { name: "Dubois", lat: 43.5336, lon: -109.6304, dx: 5, dy: -5 },
-  { name: "Pinedale", lat: 42.8679, lon: -109.8634, dx: -55, dy: -5 },
+  { name: "Dubois", lat: 43.5336, lon: -109.6304, dx: 25, dy: -5 },
+  { name: "Pinedale", lat: 42.8679, lon: -109.8634, dx: -25, dy: -5 },
   {
     name: "Atlantic City",
     lat: 42.4966,
     lon: -108.7307,
-    dx: 5,
+    dx: 25,
     dy: -5,
   },
-  { name: "Rawlins", lat: 41.7911, lon: -107.2387, dx: 5, dy: -5 },
-  { name: "Encampment", lat: 41.2061, lon: -106.8001, dx: 5, dy: -5 },
+  { name: "Rawlins", lat: 41.7911, lon: -107.2387, dx: 25, dy: -5 },
+  { name: "Encampment", lat: 41.2061, lon: -106.8001, dx: 25, dy: -5 },
   {
     name: "Steamboat Springs",
     lat: 40.485,
     lon: -106.8317,
-    dx: -115,
+    dx: -25,
     dy: -5,
   },
   {
     name: "Grand Lake",
     lat: 40.2522,
     lon: -105.8231,
-    dx: 15,
+    dx: 25,
     dy: -5,
   },
   {
     name: "Breckenridge",
     lat: 39.4817,
     lon: -106.0384,
-    dx: 15,
+    dx: 25,
     dy: 5,
   },
-  { name: "Twin Lakes", lat: 39.082, lon: -106.3823, dx: -85, dy: -5 },
-  { name: "Salida", lat: 38.5347, lon: -105.9989, dx: 5, dy: 5 },
-  { name: "Lake City", lat: 38.03, lon: -107.3153, dx: -85, dy: -5 },
+  { name: "Twin Lakes", lat: 39.082, lon: -106.3823, dx: -25, dy: -5 },
+  { name: "Salida", lat: 38.5347, lon: -105.9989, dx: 25, dy: 5 },
+  { name: "Lake City", lat: 38.03, lon: -107.3153, dx: -25, dy: -5 },
   {
     name: "Pagosa Springs",
     lat: 37.2694,
     lon: -107.0098,
-    dx: -125,
+    dx: -25,
     dy: -5,
   },
-  { name: "Chama", lat: 36.9028, lon: -106.5792, dx: 5, dy: 5 },
-  { name: "Ghost Ranch", lat: 36.3313, lon: -106.4729, dx: 5, dy: 5 },
-  { name: "Cuba", lat: 36.0222, lon: -106.9584, dx: 5, dy: 5 },
-  { name: "Grants", lat: 35.1473, lon: -107.8514, dx: 5, dy: 5 },
-  { name: "Pie Town", lat: 34.2984, lon: -108.1348, dx: 5, dy: 5 },
+  { name: "Chama", lat: 36.9028, lon: -106.5792, dx: 25, dy: 5 },
+  { name: "Ghost Ranch", lat: 36.3313, lon: -106.4729, dx: 25, dy: 5 },
+  { name: "Cuba", lat: 36.0222, lon: -106.9584, dx: -25, dy: -5 },
+  { name: "Grants", lat: 35.1473, lon: -107.8514, dx: 25, dy: 5 },
+  { name: "Pie Town", lat: 34.2984, lon: -108.1348, dx: 25, dy: 5 },
   {
     name: "Doc Campbell's",
     lat: 33.1987,
     lon: -108.2081,
-    dx: 5,
+    dx: 25,
     dy: 5,
   },
-  { name: "Silver City", lat: 32.7701, lon: -108.2803, dx: 5, dy: 5 },
-  { name: "Lordsburg", lat: 32.3504, lon: -108.7087, dx: 5, dy: 5 },
+  { name: "Silver City", lat: 32.7701, lon: -108.2803, dx: -25, dy: -5 },
+  { name: "Lordsburg", lat: 32.3504, lon: -108.7087, dx: 25, dy: 5 },
   {
     name: "CDT Southern Terminus",
     lat: 31.8611,
     lon: -108.2511,
-    dx: 5,
-    dy: 5,
+    dx: 15,
+    dy: 25,
   },
 ];
 
@@ -268,23 +268,6 @@ cityGroup
   .attr("fill", "black")
   .attr("stroke", "none");
 
-  // labels.each(function(d, i) {
-  //   const label = d3.select(this);
-  //   const bbox = this.getBBox(); // get width, height
-  
-  //   const x0 = projection([d.lon, d.lat])[0];
-  //   const y0 = projection([d.lon, d.lat])[1];
-  
-  //   const xLabel = x0 + d.dx;
-  //   const yLabel = y0 + d.dy;
-  
-  //   const xEnd = d.dx <= 0 ? xLabel + bbox.width : xLabel;
-  //   const yEnd = yLabel;
-  
-  //   d3.select(lines.nodes()[i])
-  //     .attr("x2", xEnd)
-  //     .attr("y2", yEnd);
-  // });
 
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
