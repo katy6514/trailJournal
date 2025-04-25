@@ -397,6 +397,13 @@ svg
   .attr("r", 6)
   .style("fill", "green")
   .style("stroke", "none");
+  svg
+  .append("circle")
+  .attr("cx", 100)
+  .attr("cy", 520)
+  .attr("r", 6)
+  .style("fill", "black")
+  .style("stroke", "none");
 svg
   .append("text")
   .attr("x", 120)
@@ -418,6 +425,14 @@ svg
   .attr("x", 120)
   .attr("y", 490)
   .text("Photo Location")
+  .style("font-size", "15px")
+  .attr("alignment-baseline", "middle")
+  .style("font-family", "Open Sans");
+  svg
+  .append("text")
+  .attr("x", 120)
+  .attr("y", 520)
+  .text("Resupply Stops")
   .style("font-size", "15px")
   .attr("alignment-baseline", "middle")
   .style("font-family", "Open Sans");
