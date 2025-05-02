@@ -51,9 +51,9 @@ d3.json("cdtInreachData.geojson").then((data) => {
     .attr("r", 4)
     .attr("fill", (d) => checkForCampsite(d))
     .attr("stroke", "none")
-    .on("mouseover", handleMouseOver);
-  // .on("mousemove", inReachMouseMove)
-  // .on("mouseout", inReachMouseOut);
+    .on("mouseover", handleMouseOver)
+    .on("mousemove", handleMouseMove)
+    .on("mouseout", handleMouseOut);
 });
 
 function checkForCampsite(data) {
@@ -300,9 +300,8 @@ function handleMouseOver(event, d) {
   if (d.type === "Feature") {
     // If the data is a GeoJSON Feature, extract properties
     // display message text but only when logged in
-    // console.log(d)
-    // tooltip.innerHTML = ` <p>Message: ${d.properties.MessageText}<p>`;
-    // tooltip.style.display = "block";
+    tooltip.innerHTML = ` <p>Message: ${d.properties.GPSTime}<p>`;
+    tooltip.style.display = "block";
   } else {
     tooltip.innerHTML = `<img src="${d.path}" width="550">`;
     tooltip.style.display = "block";
