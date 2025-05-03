@@ -38,8 +38,8 @@ d3.csv("message-history.csv").then((data) => {
         coords.length >= 2 &&
         !isNaN(coords[1]) &&
         !isNaN(coords[0]) &&
-        coords[1] !== 0 && 
-        coords[0] !== 0 && 
+        coords[1] !== 0 &&
+        coords[0] !== 0 &&
         typeof coords[1] === "number" && // lat
         typeof coords[0] === "number" // lon
       );
@@ -67,9 +67,9 @@ d3.csv("message-history.csv").then((data) => {
 });
 
 /**
- * 
+ *
  * Save to file
- * 
+ *
  */
 function saveToFile(data, filename) {
   // Convert the cleaned data to JSON
@@ -929,6 +929,7 @@ async function loadPhotoMetadata(paths) {
 
   const exportableGeoPhotos = geoPhotos.map((photo) => ({
     path: photo.path, // e.g. "CDTvisPhotos/IMG_1234.jpg"
+    // type: "Photo",
     latitude: photo.latitude,
     longitude: photo.longitude,
     dateTime: photo.dateTime,
@@ -939,9 +940,9 @@ async function loadPhotoMetadata(paths) {
 }
 
 /**
- * 
+ *
  * Helper function to download GeoJSON file
- * 
+ *
  */
 function downloadGeoJSON(data, filename = "photoData.json") {
   const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -957,7 +958,6 @@ function downloadGeoJSON(data, filename = "photoData.json") {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
-
 
 // Call the function to start the photo analysis process
 // loadPhotoMetadata(imagePaths);

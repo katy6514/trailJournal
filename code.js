@@ -25,40 +25,34 @@ const projection = d3
 const path = d3.geoPath().projection(projection);
 
 const getAlternatingColor = (properties) => {
-  const {title} = properties;
+  const { title } = properties;
   if (typeof title === "string") {
-    const legNum = Number(title.split(" ")[1]);
+    const legNum = Number(title.split(" ")[0]);
     if (legNum % 2 === 0) {
       return "blue";
     } else {
-      return "red";
-    }}
+      return "orange";
+    }
+  }
+};
 /* -----------------------------------------------------
  *  Plotting route Data
  ----------------------------------------------------- */
 d3.json("CDT_border_to_lincoln.json").then((data) => {
-
-  // const points = data.features.filter(
-  //   (d) =>
-  //     d.geometry?.type === "Point" &&
-  //     Array.isArray(d.geometry.coordinates) &&
-  //     d.geometry.coordinates.length === 2
-  // );
-  // const validPoints = points.filter((d) => {
-  //   const projected = projection(d.geometry.coordinates);
-  //   return projected != null;
-  // });
-
   // Plot the points
-  svg.selectAll('.trail')
-  .data(data.features)
-  .enter()
-  .append('path')
-  .attr('class', 'trail')
-  .attr('d', path)
-  .attr('stroke', (d) => getAlternatingColor(d.properties) )
-  .attr('stroke-width', 1)
-  .attr('fill', 'none');
+  svg
+    .selectAll(".trail")
+    .data(data.features)
+    .enter()
+    .append("path")
+    .attr("class", "trail")
+    .attr("d", path)
+    .attr("stroke", (d) => getAlternatingColor(d.properties))
+    .attr("stroke-width", 1)
+    .attr("fill", "none")
+    .on("mouseover", handleMouseOver)
+    .on("mousemove", handleMouseMove)
+    .on("mouseout", handleMouseOut);
 });
 
 /* -----------------------------------------------------
@@ -305,8 +299,6 @@ const labels = cityGroup
   .attr("fill", "black")
   .attr("stroke", "none");
 
-
-
 /* -----------------------------------------------------
  *  Take the cleaned photo geojson data and plot it
  ----------------------------------------------------- */
@@ -331,24 +323,33 @@ d3.json("photoData.json").then((photoData) => {
     .on("mouseout", handleMouseOut);
 });
 
-
 const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
   // timeStyle: "medium",
   // timeZone: "America/Denver",
-})
+});
 
 function handleMouseOver(event, d) {
+  // console.log(d.geometry.type);
+  if (!d) {
+    return;
+  }
   const tooltip = document.getElementById("tooltip");
 
-  if (d.type === "Feature") {
-    // If the data is a GeoJSON Feature, extract properties
-    // display message text but only when logged in
-    // const messageText = d.properties.MessageText;
-    const messageDate = new Date(d.properties.GPSTime)
-  const messageDateString = dateTimeFormatter.format(messageDate)
-    tooltip.innerHTML = ` <p>Message Date: ${messageDateString}<p>`;
-    tooltip.style.display = "block";
+  if (d.geometry && d.geometry.type) {
+    const { type } = d.geometry;
+    if (type === "Point") {
+      // inreach data point, display its date
+      const messageDate = new Date(d.properties.GPSTime);
+      const messageDateString = dateTimeFormatter.format(messageDate);
+      tooltip.innerHTML = ` <p>Message Date: ${messageDateString}<p>`;
+      tooltip.style.display = "block";
+    } else if (type === "LineString") {
+      // trail route, display it's leg name
+      const legName = d.properties.description;
+      tooltip.innerHTML = ` <p>Leg: ${legName}<p>`;
+      tooltip.style.display = "block";
+    }
   } else {
     tooltip.innerHTML = `<img src="${d.path}" width="550">`;
     tooltip.style.display = "block";
@@ -412,8 +413,7 @@ const zoom = d3
     d3.selectAll("circle").attr("r", 4 / scale);
     labels.attr("font-size", 12 / scale);
     d3.selectAll("line").attr("stroke-width", 1 / scale);
-    d3.selectAll('.trail').attr("stroke-width", 4 / scale);
-    
+    d3.selectAll(".trail").attr("stroke-width", 4 / scale);
   });
 
 svg.call(zoom);
