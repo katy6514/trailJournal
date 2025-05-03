@@ -38,6 +38,8 @@ d3.csv("message-history.csv").then((data) => {
         coords.length >= 2 &&
         !isNaN(coords[1]) &&
         !isNaN(coords[0]) &&
+        coords[1] !== 0 && 
+        coords[0] !== 0 && 
         typeof coords[1] === "number" && // lat
         typeof coords[0] === "number" // lon
       );
@@ -60,6 +62,7 @@ d3.csv("message-history.csv").then((data) => {
   };
 
   // Save the filtered GeoJSON to a file
+  // console.log("Saving the file")
   // saveToFile(timeFilteredGeojson, 'cdtInreachData.geojson');
 });
 
