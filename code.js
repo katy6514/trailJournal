@@ -35,6 +35,48 @@ const getAlternatingColor = (properties) => {
     }
   }
 };
+
+const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "medium",
+});
+
+function handleMouseOver(event, d) {
+  // console.log(this);
+  if (!d) {
+    return;
+  }
+  const tooltip = document.getElementById("tooltip");
+
+  if (d.geometry && d.geometry.type) {
+    const { type } = d.geometry;
+    if (type === "Point") {
+      // inreach data point, display its date
+      const messageDate = new Date(d.properties.GPSTime);
+      const messageDateString = dateTimeFormatter.format(messageDate);
+      tooltip.innerHTML = ` <p>Message Date: ${messageDateString}<p>`;
+      tooltip.style.display = "block";
+    } else if (type === "LineString") {
+      // trail route, display it's leg name
+      const legName = d.properties.description;
+      tooltip.innerHTML = ` <p>Leg: ${legName}<p>`;
+      tooltip.style.display = "block";
+    }
+  } else {
+    tooltip.innerHTML = `<img src="${d.path}" width="550">`;
+    tooltip.style.display = "block";
+  }
+}
+
+function handleMouseMove(event) {
+  const tooltip = document.getElementById("tooltip");
+  tooltip.style.left = event.pageX + 15 + "px";
+  tooltip.style.top = event.pageY - 50 + "px";
+}
+
+function handleMouseOut() {
+  document.getElementById("tooltip").style.display = "none";
+}
+
 /* -----------------------------------------------------
  *  Plotting route Data
  ----------------------------------------------------- */
@@ -114,6 +156,7 @@ d3.json("CDTstates.json").then((data) => {
     .attr("stroke", "rgb(127, 127, 127)")
     .attr("stroke-width", "1px")
     .attr("d", path)
+    .lower()
     .on("click", clicked);
 });
 
@@ -323,49 +366,6 @@ d3.json("photoData.json").then((photoData) => {
     .on("mouseout", handleMouseOut);
 });
 
-const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "medium",
-  // timeStyle: "medium",
-  // timeZone: "America/Denver",
-});
-
-function handleMouseOver(event, d) {
-  // console.log(d.geometry.type);
-  if (!d) {
-    return;
-  }
-  const tooltip = document.getElementById("tooltip");
-
-  if (d.geometry && d.geometry.type) {
-    const { type } = d.geometry;
-    if (type === "Point") {
-      // inreach data point, display its date
-      const messageDate = new Date(d.properties.GPSTime);
-      const messageDateString = dateTimeFormatter.format(messageDate);
-      tooltip.innerHTML = ` <p>Message Date: ${messageDateString}<p>`;
-      tooltip.style.display = "block";
-    } else if (type === "LineString") {
-      // trail route, display it's leg name
-      const legName = d.properties.description;
-      tooltip.innerHTML = ` <p>Leg: ${legName}<p>`;
-      tooltip.style.display = "block";
-    }
-  } else {
-    tooltip.innerHTML = `<img src="${d.path}" width="550">`;
-    tooltip.style.display = "block";
-  }
-}
-
-function handleMouseMove(event) {
-  const tooltip = document.getElementById("tooltip");
-  tooltip.style.left = event.pageX + 15 + "px";
-  tooltip.style.top = event.pageY - 50 + "px";
-}
-
-function handleMouseOut() {
-  document.getElementById("tooltip").style.display = "none";
-}
-
 /* -----------------------------------------------------
  *  Zoom and Pan functionality
  ----------------------------------------------------- */
@@ -413,7 +413,7 @@ const zoom = d3
     d3.selectAll("circle").attr("r", 4 / scale);
     labels.attr("font-size", 12 / scale);
     d3.selectAll("line").attr("stroke-width", 1 / scale);
-    d3.selectAll(".trail").attr("stroke-width", 4 / scale);
+    d3.selectAll(".trail").attr("stroke-width", 2 / scale);
   });
 
 svg.call(zoom);
