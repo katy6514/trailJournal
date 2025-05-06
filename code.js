@@ -459,6 +459,23 @@ svg
   .style("fill", "black")
   .style("stroke", "none");
 svg
+  .append("line")
+  .attr("x1", 90)
+  .attr("x2", 110)
+  .attr("y1", 550)
+  .attr("y2", 550)
+  .attr("stroke", "blue") // Set the line color
+  .attr("stroke-width", 3); // Set the line width
+svg
+  .append("line")
+  .attr("x1", 90)
+  .attr("x2", 110)
+  .attr("y1", 580)
+  .attr("y2", 580)
+  .attr("stroke", "orange") // Set the line color
+  .attr("stroke-width", 3); // Set the line width
+
+svg
   .append("text")
   .attr("x", 120)
   .attr("y", 430)
@@ -487,6 +504,22 @@ svg
   .attr("x", 120)
   .attr("y", 520)
   .text("Resupply Stops")
+  .style("font-size", "15px")
+  .attr("alignment-baseline", "middle")
+  .style("font-family", "Open Sans");
+svg
+  .append("text")
+  .attr("x", 120)
+  .attr("y", 550)
+  .text("Even days")
+  .style("font-size", "15px")
+  .attr("alignment-baseline", "middle")
+  .style("font-family", "Open Sans");
+svg
+  .append("text")
+  .attr("x", 120)
+  .attr("y", 580)
+  .text("Odd days")
   .style("font-size", "15px")
   .attr("alignment-baseline", "middle")
   .style("font-family", "Open Sans");
