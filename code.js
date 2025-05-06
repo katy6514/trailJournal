@@ -24,7 +24,7 @@ const projection = d3
 
 const path = d3.geoPath().projection(projection);
 
-const getAlternatingColor = (properties) => {
+function getAlternatingColor(properties) {
   const { title } = properties;
   if (typeof title === "string") {
     const legNum = Number(title.split(" ")[0]);
@@ -34,7 +34,7 @@ const getAlternatingColor = (properties) => {
       return "orange";
     }
   }
-};
+}
 
 const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
@@ -389,13 +389,13 @@ function clicked(event, d) {
     .transition()
     .duration(750)
     .call(
-      zoom.transform,
+      CDTzoom.transform,
       d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
     );
 }
 
 // Set up the zoom behavior
-const zoom = d3
+const CDTzoom = d3
   .zoom()
   .scaleExtent([1, 500]) // Limits of the zoom scale
   // .on("zoom", handleZoom);
@@ -417,13 +417,13 @@ const zoom = d3
     d3.selectAll(".trail").attr("stroke-width", 2 / scale);
   });
 
-svg.call(zoom);
+svg.call(CDTzoom);
 
 // Add background click to reset zoom
 svg.on("click", (event) => {
   if (event.target.tagName !== "path") {
     // Check if clicked outside a state
-    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity); // Reset zoom to initial state
+    svg.transition().duration(750).call(CDTzoom.transform, d3.zoomIdentity); // Reset zoom to initial state
   }
 });
 
