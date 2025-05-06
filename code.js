@@ -57,8 +57,9 @@ function handleMouseOver(event, d) {
       tooltip.style.display = "block";
     } else if (type === "LineString") {
       // trail route, display it's leg name
+      const legNum = d.properties.title;
       const legName = d.properties.description;
-      tooltip.innerHTML = ` <p>Leg: ${legName}<p>`;
+      tooltip.innerHTML = ` <p>Leg #${legNum}: ${legName}<p>`;
       tooltip.style.display = "block";
     }
   } else {
